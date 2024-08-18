@@ -22,6 +22,7 @@ const corsOptions: cors.CorsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
   credentials: env !== "prd", // Allow credentials
 };
+console.log(corsOptions);
 
 app.use(cors());
 

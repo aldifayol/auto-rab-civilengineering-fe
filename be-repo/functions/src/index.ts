@@ -1,43 +1,19 @@
-import { onRequest } from "firebase-functions/v2/https";
-// import * as logger from "firebase-functions/logger";
+/**
+ * Import function triggers from their respective submodules:
+ *
+ * import {onCall} from "firebase-functions/v2/https";
+ * import {onDocumentWritten} from "firebase-functions/v2/firestore";
+ *
+ * See a full list of supported triggers at https://firebase.google.com/docs/functions
+ */
 
-import * as express from "express";
-import { Application, Request, Response } from "express";
-import connectMongoDB from "./config/Database";
-import routes from "./routes/Routes";
-import * as dotenv from "dotenv";
-import * as cors from "cors";
-import { API_VERSION } from "./utils/Constant";
+import {onRequest} from "firebase-functions/v2/https";
+import * as logger from "firebase-functions/logger";
 
-dotenv.config();
+// Start writing functions
+// https://firebase.google.com/docs/functions/typescript
 
-const app: Application = express();
-
-const env = process.env.ENV;
-
-// CORS configuration options
-const corsOptions: cors.CorsOptions = {
-  origin: env === "prd" ? ["http://example.com", "http://anotherdomain.com"] : "*", // Allow these domains
-  methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
-  credentials: env !== "prd", // Allow credentials
-};
-console.log(corsOptions);
-
-app.use(cors());
-
-app.use(express.json());
-
-app.get("/", (req: Request, res: Response) => {
-  res.send(`Bamudungs Authenticate Service ${API_VERSION}!`);
-});
-
-app.use(`/api/v1`, routes);
-
-const PORT = process.env.PORT || 3000;
-
-connectMongoDB().then(() => {
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-});
-
-exports.app = onRequest(app);
+// export const helloWorld = onRequest((request, response) => {
+//   logger.info("Hello logs!", {structuredData: true});
+//   response.send("Hello from Firebase!");
+// });

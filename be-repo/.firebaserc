@@ -1,1 +1,9 @@
-{}
+{
+  "projects": {
+    "brainbyting": "brainbyte-relawan-master",
+    "default": "brainbyte-relawan-master"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
